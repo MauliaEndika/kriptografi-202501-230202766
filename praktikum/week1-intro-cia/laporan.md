@@ -30,4 +30,4 @@ QUIZ SINGKAT
 3.Apa perbedaan utama antara kriptografi klasik dan kriptografi modern? Kriptografi klasik menggunakan teknik sederhana seperti Caesar Cipher dan Vigenère Cipher yang berbasis pergeseran huruf, sedangkan kriptografi modern menggunakan algoritma matematika kompleks seperti AES dan RSA. Jika kriptografi klasik mudah dipecahkan, kriptografi modern jauh lebih aman karena melibatkan kunci publik dan privat serta perhitungan komputasi yang sulit diuraikan. 
 
 --- Dokumentasi Setup GitHub
-![Setup GitHub](screenshots/repo_setup.png)
+![Setup GitHub](screenshoots/repo_setup.png)

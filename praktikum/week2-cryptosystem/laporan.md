@@ -38,5 +38,5 @@ Distribusi kunci menjadi isu penting dalam kriptografi simetris karena kunci yan
 
 ---
 ## 5. Hasil dan Pembahasan
-![Hasil Eksekusi](screenshots/hasil_eksekusi.png)
+![Hasil Eksekusi](screenshots/hasil_eksekusi.png.png)
 

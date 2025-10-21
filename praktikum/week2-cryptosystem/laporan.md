@@ -37,3 +37,6 @@ Jawab: Sistem kriptografi simetris memiliki keuntungan karena cara enkripsi dan 
 Distribusi kunci menjadi isu penting dalam kriptografi simetris karena kunci yang digunakan untuk melakukan enkripsi dan dekripsi adalah identik, sehingga dua pihak yang terlibat dalam komunikasi harus secara aman memiliki salinan kunci yang serupa. Apabila kunci tersebut terbongkar atau diintip saat proses pengiriman, orang yang tidak berwenang dapat mengakses seluruh pesan yang telah dienkripsi. Oleh sebab itu, memastikan keamanan dalam pengiriman dan penyimpanan kunci menjadi tantangan utama dalam sistem kriptografi simetris.
 
 ---
+## 5. Hasil dan Pembahasan
+![Hasil Eksekusi](screenshots/hasil_eksekusi.png)
+

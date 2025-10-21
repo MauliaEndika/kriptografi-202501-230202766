@@ -21,31 +21,14 @@ Secara umum, kriptosistem terbagi menjadi dua kategori, yaitu simetris (menganda
 
 ---
 
-## 3. Alat dan Bahan
-(- Python 3.x  
-- Visual Studio Code / editor lain  
-- Git dan akun GitHub  
-- Library tambahan (misalnya pycryptodome, jika diperlukan)  )
-
----
-
-## 4. Langkah Percobaan
-(Tuliskan langkah yang dilakukan sesuai instruksi.  
-Contoh format:
-1. Membuat file `caesar_cipher.py` di folder `praktikum/week2-cryptosystem/src/`.
-2. Menyalin kode program dari panduan praktikum.
-3. Menjalankan program dengan perintah `python caesar_cipher.py`.)
-
----
-
-## 5. Klasifikasi Simetris & Asimetris
+## 3. Klasifikasi Simetris & Asimetris
 Dalam kriptografi simetris, proses enkripsi dan dekripsi dilakukan dengan menggunakan satu kunci yang identik. Hal ini berarti bahwa pengirim dan penerima pesan perlu memiliki serta menjaga kerahasiaan kunci tersebut agar komunikasi tetap terlindungi. Keuntungan dari sistem ini adalah kecepatannya yang sangat tinggi karena algoritmanya sederhana dan efektif, sehingga sangat sesuai untuk mengenkripsi data dalam jumlah besar seperti file, database, atau komunikasi secara real-time. Namun, salah satu kelemahannya adalah dalam pengaturan distribusi kunci — jika kunci tersebut berhasil dicuri atau bocor saat dalam pengiriman, maka seluruh pesan yang dienkripsi dengan kunci itu bisa dengan mudah diakses oleh pihak yang tidak berhak. Dua algoritma terkenal yang menerapkan metode simetris adalah AES (Standar Enkripsi Lanjut) dan DES (Standar Enkripsi Data).
 
 Di sisi lain, kriptografi asimetris menggunakan dua kunci yang berbeda, yaitu kunci publik dan kunci privat. Kunci publik dapat dibagikan secara bebas kepada siapapun untuk tujuan enkripsi, sementara kunci privat hanya diakses oleh pemilik dan digunakan untuk dekripsi. Dengan sistem ini, persoalan distribusi kunci dapat diatasi karena tidak perlu mengirimkan kunci rahasia melalui saluran komunikasi. Keuntungan utama dari kriptografi asimetris adalah tingkat keamanannya lebih tinggi saat bertukar data atau dalam proses otentikasi identitas, meskipun kecepatan prosesnya lebih lambat dibandingkan kriptografi simetris karena memerlukan perhitungan matematis yang lebih rumit. Contoh algoritma yang menerapkan pendekatan ini antara lain RSA (Rivest–Shamir–Adleman) dan ECC (Kriptografi Kurva Eliptik), yang sering digunakan dalam sistem keamanan modern seperti tanda tangan digital, sertifikat SSL, dan enkripsi data dalam komunikasi internet.
 
 ---
 
-## 6. Pertanyaan Diskusi
+## 4. Pertanyaan Diskusi
 1.Sebutkan komponen utama dalam sebuah kriptosistem
 Jawab: Komponen utama dalam kriptosistem meliputi plaintext sebagai pesan asli, ciphertext sebagai hasil enkripsi, algoritma kriptografi sebagai aturan pengubahan data, kunci (key) sebagai elemen rahasia, serta proses enkripsi dan dekripsi untuk mengamankan dan mengembalikan pesan ke bentuk semula.
 2.Apa kelebihan dan kelemahan sistem simetris dibandingkan asimetris?
@@ -54,27 +37,3 @@ Jawab: Sistem kriptografi simetris memiliki keuntungan karena cara enkripsi dan 
 Distribusi kunci menjadi isu penting dalam kriptografi simetris karena kunci yang digunakan untuk melakukan enkripsi dan dekripsi adalah identik, sehingga dua pihak yang terlibat dalam komunikasi harus secara aman memiliki salinan kunci yang serupa. Apabila kunci tersebut terbongkar atau diintip saat proses pengiriman, orang yang tidak berwenang dapat mengakses seluruh pesan yang telah dienkripsi. Oleh sebab itu, memastikan keamanan dalam pengiriman dan penyimpanan kunci menjadi tantangan utama dalam sistem kriptografi simetris.
 
 ---
-
-## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
-
----
-
-## 9. Daftar Pustaka
-(Cantumkan referensi yang digunakan.  
-Contoh:  
-- Katz, J., & Lindell, Y. *Introduction to Modern Cryptography*.  
-- Stallings, W. *Cryptography and Network Security*.  )
-
----
-
-## 10. Commit Log
-(Tuliskan bukti commit Git yang relevan.  
-Contoh:
-```
-commit abc12345
-Author: Nama Mahasiswa <email>
-Date:   2025-09-20
-
-    week2-cryptosystem: implementasi Caesar Cipher dan laporan )
-```

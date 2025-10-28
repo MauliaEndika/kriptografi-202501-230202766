@@ -1,7 +1,7 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
+Minggu ke-: 3  
 Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
+Nama: maulia endika putri 
 NIM: [NIM Mahasiswa]  
 Kelas: [Kelas]  
 

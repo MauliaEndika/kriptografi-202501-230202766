@@ -3,7 +3,7 @@ Minggu ke-: 3
 Topik: [judul praktikum]  
 Nama: maulia endika putri 
 NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Kelas: 5IKRA  
 
 ---
 

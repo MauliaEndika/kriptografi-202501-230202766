@@ -1,20 +1,19 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 6
+Topik: Cipher Modern (DES, AES, RSA)
+Nama: Maulia Endika Putri  
+NIM: 230202766  
+Kelas: 5IKRA
 
 ---
 
 ## 1. Tujuan
-(Tuliskan tujuan pembelajaran praktikum sesuai modul.)
+mengimplementasikan algoritma DES untuk blok data sederhana, menerapkan AES dengan kunci 128 bit, serta menjelaskan proses pembangkitan kunci publik dan privat pada RSA.
 
 ---
 
 ## 2. Dasar Teori
-(Ringkas teori relevan (cukup 2–3 paragraf).  
-Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
+Cipher modern merupakan algoritma kriptografi yang digunakan untuk mengamankan data digital dengan tingkat keamanan yang jauh lebih kuat dibanding cipher klasik. DES (Data Encryption Standard) adalah algoritma enkripsi simetris berbasis blok 64-bit yang menggunakan kunci 56-bit, bekerja melalui 16 putaran Feistel namun kini dianggap kurang aman karena panjang kunci yang kecil. AES (Advanced Encryption Standard) merupakan algoritma simetris generasi baru yang menggunakan ukuran blok 128-bit dan kunci 128/192/256 bit, memberikan keamanan tinggi, efisiensi, serta menjadi standar global untuk enkripsi data. Sementara itu, RSA adalah algoritma kriptografi kunci publik yang menggunakan pasangan kunci publik dan privat berdasarkan konsep faktorisasi bilangan prima besar, sehingga banyak digunakan untuk enkripsi, autentikasi, dan digital signature. Ketiga algoritma ini menjadi fondasi utama keamanan informasi modern karena tingkat perlindungan data yang kuat pada berbagai aplikasi digital.
 
 ---
 
@@ -26,23 +25,61 @@ Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
 
 ---
 
-## 4. Langkah Percobaan
-(Tuliskan langkah yang dilakukan sesuai instruksi.  
-Contoh format:
-1. Membuat file `caesar_cipher.py` di folder `praktikum/week2-cryptosystem/src/`.
-2. Menyalin kode program dari panduan praktikum.
-3. Menjalankan program dengan perintah `python caesar_cipher.py`.)
-
----
-
 ## 5. Source Code
-(Salin kode program utama yang dibuat atau dimodifikasi.  
-Gunakan blok kode:
-
+1. Implementasi DES (Opsional, Simulasi)
 ```python
-# contoh potongan kode
-def encrypt(text, key):
-    return ...
+from Crypto.Cipher import DES
+from Crypto.Random import get_random_bytes
+
+key = get_random_bytes(8)  # kunci 64 bit (8 byte)
+cipher = DES.new(key, DES.MODE_ECB)
+
+plaintext = b"ABCDEFGH"
+ciphertext = cipher.encrypt(plaintext)
+print("Ciphertext:", ciphertext)
+
+decipher = DES.new(key, DES.MODE_ECB)
+decrypted = decipher.decrypt(ciphertext)
+print("Decrypted:", decrypted)
+```
+2. Implementasi AES-128
+```python
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+
+key = get_random_bytes(16)  # 128 bit key
+cipher = AES.new(key, AES.MODE_EAX)
+
+plaintext = b"Modern Cipher AES Example"
+ciphertext, tag = cipher.encrypt_and_digest(plaintext)
+
+print("Ciphertext:", ciphertext)
+
+# Dekripsi
+cipher_dec = AES.new(key, AES.MODE_EAX, nonce=cipher.nonce)
+decrypted = cipher_dec.decrypt(ciphertext)
+print("Decrypted:", decrypted.decode())
+```
+3. Implementasi RSA
+```python
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
+
+# Generate key pair
+key = RSA.generate(2048)
+private_key = key
+public_key = key.publickey()
+
+# Enkripsi dengan public key
+cipher_rsa = PKCS1_OAEP.new(public_key)
+plaintext = b"RSA Example"
+ciphertext = cipher_rsa.encrypt(plaintext)
+print("Ciphertext:", ciphertext)
+
+# Dekripsi dengan private key
+decipher_rsa = PKCS1_OAEP.new(private_key)
+decrypted = decipher_rsa.decrypt(ciphertext)
+print("Decrypted:", decrypted.decode())
 ```
 )
 
@@ -64,31 +101,23 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 7. Jawaban Pertanyaan
-(Jawab pertanyaan diskusi yang diberikan pada modul.  
-- Pertanyaan 1: …  
-- Pertanyaan 2: …  
-)
+1. Apa perbedaan mendasar antara DES, AES, dan RSA dalam hal kunci dan keamanan? DES dan AES adalah cipher simetris yang menggunakan kunci yang sama untuk enkripsi dan dekripsi, sedangkan RSA adalah cipher asimetris yang memakai kunci publik dan kunci privat. DES memiliki kunci pendek (56-bit) sehingga mudah dibobol, AES memiliki kunci kuat (128–256 bit), sedangkan keamanan RSA bergantung pada sulitnya memfaktorkan bilangan prima besar.
+2. Mengapa AES lebih banyak digunakan dibanding DES di era modern? Karena AES jauh lebih aman, memiliki ukuran kunci lebih besar, lebih efisien, dan tahan brute force, sementara DES dianggap tidak aman karena kunci 56-bit dapat ditembus komputer modern.
+3. Mengapa RSA dikategorikan sebagai algoritma asimetris, dan bagaimana proses pembangkitan kuncinya? RSA disebut asimetris karena menggunakan dua kunci berbeda, yaitu kunci publik untuk enkripsi dan kunci privat untuk dekripsi. Kuncinya dibuat dengan memilih dua bilangan prima besar, menghitung modulus n, menentukan nilai e (public exponent), lalu menghitung d (private exponent) yang menjadi kunci privat.
+
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+Algoritma kriptografi modern seperti DES, AES, dan RSA menjadi fondasi penting dalam pengamanan data digital. DES kini dianggap tidak aman karena ukuran kuncinya kecil, sementara AES menjadi standar utama karena tingkat keamanan dan efisiensinya yang tinggi. RSA berperan sebagai algoritma asimetris yang memungkinkan pertukaran kunci dan autentikasi secara aman melalui penggunaan kunci publik dan privat. Secara keseluruhan, kombinasi algoritma simetris dan asimetris ini membentuk sistem keamanan informasi yang kuat dan banyak digunakan di berbagai aplikasi teknologi modern.
 
 ---
 
-## 9. Daftar Pustaka
-(Cantumkan referensi yang digunakan.  
-Contoh:  
-- Katz, J., & Lindell, Y. *Introduction to Modern Cryptography*.  
-- Stallings, W. *Cryptography and Network Security*.  )
-
----
-
-## 10. Commit Log
+## 9. Commit Log
 (Tuliskan bukti commit Git yang relevan.  
 Contoh:
 ```
 commit abc12345
-Author: Nama Mahasiswa <email>
+Author: Maulia Endika Putri <Mauliaendikaputrii@gmail.com>
 Date:   2025-09-20
 
     week2-cryptosystem: implementasi Caesar Cipher dan laporan )

@@ -1,20 +1,25 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 10
+Topik: Public Key Infrastructure (PKI & Certificate Authority)
+Nama: Asadila Haila Hamada
+NIM: 230202766 
+Kelas: 5 IKRA 
 
 ---
 
 ## 1. Tujuan
-(Tuliskan tujuan pembelajaran praktikum sesuai modul.)
+1. Membuat sertifikat digital sederhana.
+2. Menjelaskan peran Certificate Authority (CA) dalam sistem PKI.
+3. Mengevaluasi fungsi PKI dalam komunikasi aman (contoh: HTTPS, TLS).
 
 ---
 
 ## 2. Dasar Teori
-(Ringkas teori relevan (cukup 2–3 paragraf).  
-Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
+Public Key Infrastructure (PKI) adalah sistem keamanan yang mengelola penggunaan kunci publik dengan mengaitkannya pada identitas melalui sertifikat digital, sehingga komunikasi berbasis kriptografi kunci publik dapat berlangsung secara aman di jaringan terbuka.
+
+Certificate Authority (CA) berperan sebagai pihak tepercaya dalam PKI yang menerbitkan dan mengelola sertifikat digital setelah melakukan verifikasi identitas pemilik kunci publik. Sertifikat ini mendukung proses enkripsi, autentikasi, dan tanda tangan digital.
+
+PKI dan CA banyak digunakan pada berbagai layanan keamanan modern seperti TLS/SSL dan S/MIME. Melalui mekanisme rantai kepercayaan dan manajemen sertifikat, PKI memastikan keaslian identitas serta keamanan komunikasi digital.
 
 ---
 
@@ -39,10 +44,40 @@ Contoh format:
 (Salin kode program utama yang dibuat atau dimodifikasi.  
 Gunakan blok kode:
 
-```python
-# contoh potongan kode
-def encrypt(text, key):
-    return ...
+```
+from cryptography import x509
+from cryptography.x509.oid import NameOID
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives.asymmetric import rsa
+from datetime import datetime, timedelta
+
+# Generate key pair
+key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+
+# Buat subject & issuer (CA sederhana = self-signed)
+subject = issuer = x509.Name([
+    x509.NameAttribute(NameOID.COUNTRY_NAME, u"ID"),
+    x509.NameAttribute(NameOID.ORGANIZATION_NAME, u"UPB Kriptografi"),
+    x509.NameAttribute(NameOID.COMMON_NAME, u"example.com"),
+])
+
+# Buat sertifikat
+cert = (
+    x509.CertificateBuilder()
+    .subject_name(subject)
+    .issuer_name(issuer)
+    .public_key(key.public_key())
+    .serial_number(x509.random_serial_number())
+    .not_valid_before(datetime.utcnow())
+    .not_valid_after(datetime.utcnow() + timedelta(days=365))
+    .sign(key, hashes.SHA256())
+)
+
+# Simpan sertifikat
+with open("cert.pem", "wb") as f:
+    f.write(cert.public_bytes(serialization.Encoding.PEM))
+
+print("Sertifikat digital berhasil dibuat: cert.pem")
 ```
 )
 
@@ -64,22 +99,24 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 7. Jawaban Pertanyaan
-(Jawab pertanyaan diskusi yang diberikan pada modul.  
-- Pertanyaan 1: …  
-- Pertanyaan 2: …  
-)
+1. Verifikasi sertifikat HTTPS oleh browser
+Browser memvalidasi sertifikat HTTPS dengan mengecek rantai kepercayaan hingga CA tepercaya, memastikan masa berlaku, kecocokan domain, dan keabsahan tanda tangan digital. Jika semua valid, koneksi dinyatakan aman.
+
+2. Dampak CA palsu
+CA palsu dapat digunakan untuk memalsukan identitas situs dan melakukan serangan Man-in-the-Middle. Namun, browser akan menolak sertifikat dari CA yang tidak tepercaya, dan CA yang terbukti bermasalah dapat dicabut dari sistem kepercayaan.
+
+3. Pentingnya PKI
+PKI berperan penting dalam menjamin keaslian identitas dan keamanan komunikasi digital. Tanpa PKI, transaksi online dan pertukaran data sensitif tidak dapat dilakukan secara aman.
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+Public Key Infrastructure (PKI) berperan sebagai dasar keamanan komunikasi digital dengan mengelola kunci publik dan memastikan keaslian identitas. Certificate Authority (CA) bertindak sebagai pihak tepercaya yang menerbitkan sertifikat digital untuk mendukung autentikasi dan enkripsi. Dengan demikian, PKI mengurangi risiko pemalsuan identitas dan serangan Man-in-the-Middle, serta menjadi komponen penting dalam layanan keamanan modern seperti HTTPS dan transaksi online.
 
 ---
 
 ## 9. Daftar Pustaka
-(Cantumkan referensi yang digunakan.  
-Contoh:  
-- Katz, J., & Lindell, Y. *Introduction to Modern Cryptography*.  
-- Stallings, W. *Cryptography and Network Security*.  )
+- Adams, C., & Lloyd, S. (2003). Understanding PKI: Concepts, Standards, and Deployment Considerations. Addison-Wesley.
+- Kahn Academy. (n.d.). Public Key Infrastructure (PKI).
 
 ---
 

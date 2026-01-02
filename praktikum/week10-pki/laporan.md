@@ -1,7 +1,7 @@
 # Laporan Praktikum Kriptografi
 Minggu ke-: 10
 Topik: Public Key Infrastructure (PKI & Certificate Authority)
-Nama: Asadila Haila Hamada
+Nama: Maulia Endika Putri
 NIM: 230202766 
 Kelas: 5 IKRA 
 

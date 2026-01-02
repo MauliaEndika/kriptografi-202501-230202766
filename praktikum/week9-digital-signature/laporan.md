@@ -1,20 +1,25 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 9  
+Topik: Digital Signature (RSA/DSA)
+Nama: Maulia Endika Putri 
+NIM: 230202766  
+Kelas: 5 IKRA
 
 ---
 
 ## 1. Tujuan
-(Tuliskan tujuan pembelajaran praktikum sesuai modul.)
+1. Mengimplementasikan tanda tangan digital menggunakan algoritma RSA/DSA.
+2. Memverifikasi keaslian tanda tangan digital.
+3. Menjelaskan manfaat tanda tangan digital dalam otentikasi pesan dan integritas data
 
 ---
 
 ## 2. Dasar Teori
-(Ringkas teori relevan (cukup 2–3 paragraf).  
-Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
+Digital Signature adalah teknik kriptografi yang berfungsi untuk menjamin keaslian pengirim, keutuhan data, dan non-repudiation dalam komunikasi digital. Proses penandatanganan dilakukan menggunakan kunci privat, sedangkan verifikasi menggunakan kunci publik, sehingga penerima dapat memastikan bahwa pesan berasal dari pihak yang sah dan tidak mengalami perubahan.
+
+RSA dan DSA merupakan algoritma tanda tangan digital yang banyak digunakan. RSA bekerja dengan menandatangani nilai hash pesan menggunakan kunci privat dan keamanannya bergantung pada kesulitan faktorisasi bilangan besar, sedangkan DSA menggunakan perhitungan logaritma diskret dan bilangan acak rahasia dalam proses pembentukan tanda tangan.
+
+Tanda tangan digital dengan RSA dan DSA  diterapkan pada berbagai sistem keamanan seperti TLS/SSL, S/MIME, dan sertifikat digital, serta berperan penting dalam menjaga keamanan dan kepercayaan pertukaran data pada jaringan terbuka.
 
 ---
 
@@ -39,10 +44,37 @@ Contoh format:
 (Salin kode program utama yang dibuat atau dimodifikasi.  
 Gunakan blok kode:
 
-```python
-# contoh potongan kode
-def encrypt(text, key):
-    return ...
+```
+from Crypto.PublicKey import RSA
+from Crypto.Signature import pkcs1_15
+from Crypto.Hash import SHA256
+
+# Generate pasangan kunci RSA
+key = RSA.generate(2048)
+private_key = key
+public_key = key.publickey()
+
+# Pesan yang akan ditandatangani
+message = b"Hello, ini pesan penting."
+h = SHA256.new(message)
+
+# Buat tanda tangan dengan private key
+signature = pkcs1_15.new(private_key).sign(h)
+print("Signature:", signature.hex())
+try:
+    pkcs1_15.new(public_key).verify(h, signature)
+    print("Verifikasi berhasil: tanda tangan valid.")
+except (ValueError, TypeError):
+    print("Verifikasi gagal: tanda tangan tidak valid.")
+# Modifikasi pesan
+fake_message = b"Hello, ini pesan palsu."
+h_fake = SHA256.new(fake_message)
+
+try:
+    pkcs1_15.new(public_key).verify(h_fake, signature)
+    print("Verifikasi berhasil (seharusnya gagal).")
+except (ValueError, TypeError):
+    print("Verifikasi gagal: tanda tangan tidak cocok dengan pesan.")
 ```
 )
 
@@ -64,23 +96,24 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 7. Jawaban Pertanyaan
-(Jawab pertanyaan diskusi yang diberikan pada modul.  
-- Pertanyaan 1: …  
-- Pertanyaan 2: …  
-)
+1. Perbedaan enkripsi RSA dan tanda tangan digital RSA
+Enkripsi RSA bertujuan menjaga kerahasiaan pesan dengan menggunakan kunci publik penerima dan kunci privat untuk dekripsi. Sebaliknya, tanda tangan digital RSA digunakan untuk memastikan keaslian dan integritas pesan dengan memanfaatkan kunci privat pengirim dan diverifikasi melalui kunci publiknya.
+
+2. Alasan tanda tangan digital menjamin integritas dan otentikasi
+Integritas terjamin karena tanda tangan dibuat dari nilai hash pesan, sehingga perubahan data akan terdeteksi saat verifikasi. Otentikasi tercapai karena hanya pemilik kunci privat yang dapat menghasilkan tanda tangan yang sah.
+
+3. Peran Certificate Authority (CA)
+CA berfungsi sebagai pihak tepercaya yang mengaitkan identitas dengan kunci publik melalui sertifikat digital, sehingga memungkinkan verifikasi identitas dan mencegah pemalsuan atau serangan Man-in-the-Middle.
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+Digital Signature berbasis RSA dan DSA merupakan mekanisme kriptografi yang penting untuk menjamin keaslian pengirim, keutuhan data, dan non-repudiation dalam komunikasi digital. Dengan memanfaatkan pasangan kunci publik dan privat serta fungsi hash, tanda tangan digital memungkinkan verifikasi bahwa pesan benar-benar berasal dari pihak yang sah dan tidak mengalami perubahan. Dukungan sertifikat digital dan Certificate Authority semakin memperkuat keamanannya, sehingga Digital Signature RSA/DSA banyak digunakan pada berbagai sistem keamanan modern seperti TLS/SSL dan sertifikat digital.
 
 ---
 
 ## 9. Daftar Pustaka
-(Cantumkan referensi yang digunakan.  
-Contoh:  
-- Katz, J., & Lindell, Y. *Introduction to Modern Cryptography*.  
-- Stallings, W. *Cryptography and Network Security*.  )
-
+- Rivest, R. L., Shamir, A., & Adleman, L. (1978). A Method for Obtaining Digital Signatures and Public-Key Cryptosystems. Communications of the ACM, 21(2), 120–126.
+- National Institute of Standards and Technology (NIST). (2013). Digital Signature Standard (DSS). FIPS PUB 186-4.
 ---
 
 ## 10. Commit Log

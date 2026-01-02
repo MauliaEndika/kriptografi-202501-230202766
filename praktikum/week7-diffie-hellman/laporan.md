@@ -1,20 +1,23 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 7  
+Topik: Diffie-Hellman Key Exchange 
+Nama: Maulia Endika Putri 
+NIM: 230202766
+Kelas: 5 IKRA
 
 ---
 
 ## 1. Tujuan
-(Tuliskan tujuan pembelajaran praktikum sesuai modul.)
+1. Melakukan simulasi protokol Diffie-Hellman untuk pertukaran kunci publik.
+2. Menjelaskan mekanisme pertukaran kunci rahasia menggunakan bilangan prima dan logaritma diskrit.
+3. Menganalisis potensi serangan pada protokol Diffie-Hellman (termasuk serangan Man-in-the-Middle / MITM).
 
 ---
 
 ## 2. Dasar Teori
-(Ringkas teori relevan (cukup 2–3 paragraf).  
-Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
+Diffie–Hellman Key Exchange adalah metode kriptografi kunci publik yang memungkinkan dua pihak membentuk kunci rahasia bersama melalui jaringan publik secara aman. Algoritma ini diperkenalkan oleh Whitfield Diffie dan Martin Hellman pada tahun 1976 dan menjadi dasar penting dalam sistem keamanan komunikasi modern.
+
+Mekanisme Diffie–Hellman memanfaatkan aritmetika modulo dan kompleksitas masalah logaritma diskret. Dengan menyepakati parameter publik dan menggunakan nilai rahasia masing-masing, kedua pihak dapat menghasilkan kunci yang sama tanpa perlu mengirimkan kunci rahasia tersebut. Keamanan metode ini bergantung pada kesulitan pihak ketiga untuk menurunkan kunci rahasia dari informasi publik, sehingga banyak diterapkan pada protokol keamanan seperti SSL/TLS dan VPN.
 
 ---
 
@@ -39,10 +42,27 @@ Contoh format:
 (Salin kode program utama yang dibuat atau dimodifikasi.  
 Gunakan blok kode:
 
-```python
-# contoh potongan kode
-def encrypt(text, key):
-    return ...
+```Simulasi Diffie-Hellman
+import random
+
+# parameter umum (disepakati publik)
+p = 23  # bilangan prima
+g = 5   # generator
+
+# private key masing-masing pihak
+a = random.randint(1, p-1)  # secret Alice
+b = random.randint(1, p-1)  # secret Bob
+
+# public key
+A = pow(g, a, p)
+B = pow(g, b, p)
+
+# exchange public key
+shared_secret_A = pow(B, a, p)
+shared_secret_B = pow(A, b, p)
+
+print("Kunci bersama Alice :", shared_secret_A)
+print("Kunci bersama Bob   :", shared_secret_B)
 ```
 )
 
@@ -64,22 +84,30 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 7. Jawaban Pertanyaan
-(Jawab pertanyaan diskusi yang diberikan pada modul.  
-- Pertanyaan 1: …  
-- Pertanyaan 2: …  
+1. Mengapa Diffie–Hellman dapat digunakan pada saluran publik?
+Diffie–Hellman memungkinkan pertukaran kunci melalui saluran publik karena kunci rahasia tidak pernah dikirimkan secara langsung. Hanya nilai publik hasil perhitungan matematika yang dipertukarkan, sementara keamanan dijaga oleh sulitnya memecahkan masalah logaritma diskret.
+
+2. Apa kelemahan utama Diffie–Hellman murni?
+Kelemahan utama Diffie–Hellman murni adalah tidak adanya autentikasi, sehingga protokol ini rentan terhadap serangan Man-in-the-Middle (MITM), di mana penyerang dapat menyamar sebagai pihak yang sah.
+
+3. Bagaimana mencegah serangan MITM?
+Serangan MITM dapat dicegah dengan menambahkan mekanisme autentikasi, seperti sertifikat digital, tanda tangan digital, pre-shared key, atau sistem PKI, sehingga identitas pihak yang berkomunikasi dapat diverifikasi.
 )
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+Diffie–Hellman adalah mekanisme pertukaran kunci yang memungkinkan dua pihak membentuk kunci rahasia bersama melalui saluran tidak aman. Keamanannya didasarkan pada operasi matematika pangkat modulo, sehingga nilai publik yang dipertukarkan tidak dapat digunakan untuk menurunkan kunci rahasia, meskipun dapat diakses oleh pihak lain.
+
+Namun, Diffie–Hellman murni tidak menyediakan autentikasi, sehingga rentan terhadap serangan Man-in-the-Middle (MITM). Tanpa verifikasi identitas, penyerang dapat menyamar sebagai pihak yang sah dan membentuk kunci berbeda dengan masing-masing pihak.
+
+Untuk mengatasi kelemahan tersebut, Diffie–Hellman perlu dikombinasikan dengan mekanisme autentikasi seperti tanda tangan digital atau sertifikat digital. Dengan autentikasi, keaslian kunci publik dapat diverifikasi sehingga pertukaran kunci berlangsung aman, sebagaimana diterapkan pada protokol TLS/HTTPS.
 
 ---
 
 ## 9. Daftar Pustaka
-(Cantumkan referensi yang digunakan.  
-Contoh:  
-- Katz, J., & Lindell, Y. *Introduction to Modern Cryptography*.  
-- Stallings, W. *Cryptography and Network Security*.  )
+Diffie, W., & Hellman, M. (1976). New Directions in Cryptography. IEEE Transactions on Information Theory, 22(6), 644–654.
+
+Menezes, A. J., van Oorschot, P. C., & Vanstone, S. A. (1996). Handbook of Applied Cryptography
 
 ---
 

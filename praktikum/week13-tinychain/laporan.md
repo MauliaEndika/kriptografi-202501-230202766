@@ -1,20 +1,21 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 13  
+Topik: TinyChain – Proof of Work (PoW  
+Nama: Maulia Endika Putri  
+NIM: 230202766
+Kelas:5IKRA  
 
 ---
 
 ## 1. Tujuan
-(Tuliskan tujuan pembelajaran praktikum sesuai modul.)
+Menjelaskan peran hash function dalam blockchain, melakukan simulasi sederhana Proof of Work (PoW), menganalisis keamanan cryptocurrency berbasis kriptografi.
 
 ---
 
 ## 2. Dasar Teori
-(Ringkas teori relevan (cukup 2–3 paragraf).  
-Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
+TinyChain adalah contoh sederhana dari teknologi blockchain yang digunakan sebagai alat untuk mempelajari konsep dasar blockchain. Salah satu mekanisme utama TinyChain adalah Proof of Work (PoW), metode konsensus yang dimaksudkan untuk secara aman memvalidasi transaksi dan menambahkan blok baru ke dalam rantai blok.Proof of Work bekerja dengan memaksa node atau penambang (miner) untuk menyelesaikan masalah komputasi tertentu, biasanya melalui pencarian nilai hash yang menyelesaikan masalah tertentu. Karena prosesnya membutuhkan banyak waktu dan sumber daya komputasi, orang jahat sulit memanipulasi data blockchain.
+
+PoW digunakan oleh TinyChain untuk mensimulasikan proses diverifikasi blok sebelum ditambahkan ke blockchain. Ini memastikan bahwa setiap blok yang dibuat telah melalui proses validasi, menjaga integritas data, dan mencegah perubahan data yang tidak diinginkan dalam sistem blockchain
 
 ---
 
@@ -26,26 +27,55 @@ Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
 
 ---
 
-## 4. Langkah Percobaan
-(Tuliskan langkah yang dilakukan sesuai instruksi.  
-Contoh format:
-1. Membuat file `caesar_cipher.py` di folder `praktikum/week2-cryptosystem/src/`.
-2. Menyalin kode program dari panduan praktikum.
-3. Menjalankan program dengan perintah `python caesar_cipher.py`.)
+## 4. Source Code
 
----
+```import hashlib
+import time
 
-## 5. Source Code
-(Salin kode program utama yang dibuat atau dimodifikasi.  
-Gunakan blok kode:
+class Block:
+    def __init__(self, index, previous_hash, data, timestamp=None):
+        self.index = index
+        self.timestamp = timestamp or time.time()
+        self.data = data
+        self.previous_hash = previous_hash
+        self.nonce = 0
+        self.hash = self.calculate_hash()
 
-```python
-# contoh potongan kode
-def encrypt(text, key):
-    return ...
+    def calculate_hash(self):
+        value = str(self.index) + str(self.timestamp) + str(self.data) + str(self.previous_hash) + str(self.nonce)
+        return hashlib.sha256(value.encode()).hexdigest()
+
+    def mine_block(self, difficulty):
+        while self.hash[:difficulty] != "0" * difficulty:
+            self.nonce += 1
+            self.hash = self.calculate_hash()
+        print(f"Block mined: {self.hash}")...
 ```
-)
+```
+class Blockchain:
+    def __init__(self):
+        self.chain = [self.create_genesis_block()]
+        self.difficulty = 4
 
+    def create_genesis_block(self):
+        return Block(0, "0", "Genesis Block")
+
+    def get_latest_block(self):
+        return self.chain[-1]
+
+    def add_block(self, new_block):
+        new_block.previous_hash = self.get_latest_block().hash
+        new_block.mine_block(self.difficulty)
+        self.chain.append(new_block)
+
+# Uji coba blockchain
+my_chain = Blockchain()
+print("Mining block 1...")
+my_chain.add_block(Block(1, "", "Transaksi A → B: 10 Coin"))
+
+print("Mining block 2...")
+my_chain.add_block(Block(2, "", "Transaksi B → C: 5 Coin"))
+```
 ---
 
 ## 6. Hasil dan Pembahasan

@@ -78,26 +78,11 @@ my_chain.add_block(Block(2, "", "Transaksi B → C: 5 Coin"))
 ```
 ---
 
-## 6. Hasil dan Pembahasan
-(- Lampirkan screenshot hasil eksekusi program (taruh di folder `screenshots/`).  
-- Berikan tabel atau ringkasan hasil uji jika diperlukan.  
-- Jelaskan apakah hasil sesuai ekspektasi.  
-- Bahas error (jika ada) dan solusinya. 
-
-Hasil eksekusi program Caesar Cipher:
-
-![Hasil Eksekusi](screenshots/output.png)
-![Hasil Input](screenshots/input.png)
-![Hasil Output](screenshots/output.png)
-)
-
----
 
 ## 7. Jawaban Pertanyaan
-(Jawab pertanyaan diskusi yang diberikan pada modul.  
-- Pertanyaan 1: …  
-- Pertanyaan 2: …  
-)
+1. fungsi hash sangat penting dalam blockchain karena berfusngsi untuk menjaga intergritas dan keamanan data, fungsi hash sangat penting dalam blockchain. Hash dari blok sebelumnya membentuk rantai, yang membentuk rantai, yang membuatnya sulit untuk dimanipulasi atau dipalsukan. Hash fungsinya satu arah, sehingga data asli tidak dapat dengan mudah direntruksi dari nilai hash, dan konsisten dan unik, sehingga blockchain sulit untuk dimanipulasi atau dipalsukan
+2. Proof of Work mewajibkan setiap transaksi melalui proses komputasi yang kompleks sebelum dimasukan ke dalam blockchain, mencegah pembelajaran berlebihan. Untuk menghasilkan blok yang sah, penambang harus menyelesaikan teka teki kriptografi. Karena proses ini membutuhkan banyak waktu dan sumber daya, satu transaksi hanya dapat dicatat dalam satu blok yang diakui oleh jaringan, jika ada upaya untuk menggandakan transaksi, jaringan akan menolaknya karena tidak sesuai dengan sejarah tervalidasi dan terpanjang blockchain. Akibatnya, transaksi ganda tidak dapat dikonfirmasi secara bermasamaan.
+3. Salah satu kelemahan Proof of Work adalah pengunaan energi yang sangat tinggi. Meskipun hanya satu penambang yang akhirnya bershasil menambahakan blok, proses penambaangan membutuhkan perangkat keras untuk menyelesaikan perhitungan kriptografi. Akibatnya, banyak energi dibuang tanpa menghasilkan output langsung. Ini menyebabkan biaya operasional yang tinggi, jejak karbon yang signifikam, dan hasil yang kurang ramah lingkungan. Karena hal ini, mekanisme konsensus alternatif seperti Proof of Stake(PoS) yang lebih hemat energi muncul.
 ---
 
 ## 8. Kesimpulan

@@ -1,20 +1,21 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 15  
+Topik: Tinycoin  
+Nama: Maulia Endika Putri  
+NIM: 230202766  
+Kelas: 5IKRA  
 
 ---
 
 ## 1. Tujuan
-(Tuliskan tujuan pembelajaran praktikum sesuai modul.)
+1. Mengembangkan proyek sederhana berbasis algoritma kriptografi.
+2. Mendokumentasikan proses implementasi proyek ke dalam repository Git.
+3. Menyusun laporan teknis hasil proyek akhir.
 
 ---
 
 ## 2. Dasar Teori
-(Ringkas teori relevan (cukup 2–3 paragraf).  
-Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
+ERC20 adalah standar token di blockchain etherium yang menetapkan fungsi dan event tertentu supaya token bisa beroprasi secara seragam dengan dompet digital, bursa dan samrt contarct lainya. Dengan standar ini, token memiliki fitur dasar sperti memeriksa saldo, melakukan transfer, serta memberikan izin penggunaan token kepada piha lain
 
 ---
 
@@ -27,22 +28,52 @@ Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
 ---
 
 ## 4. Langkah Percobaan
-(Tuliskan langkah yang dilakukan sesuai instruksi.  
-Contoh format:
-1. Membuat file `caesar_cipher.py` di folder `praktikum/week2-cryptosystem/src/`.
-2. Menyalin kode program dari panduan praktikum.
-3. Menjalankan program dengan perintah `python caesar_cipher.py`.)
+# Langkah 1 — Membuat Kontrak ERC20
+Contoh kontrak sederhana TinyCoin.sol:
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract TinyCoin is ERC20 {
+    constructor(uint256 initialSupply) ERC20("TinyCoin", "TNC") {
+        _mint(msg.sender, initialSupply);
+    }
+}
+
+# Langkah 2 — Deploy Kontrak
+Buka Remix IDE → buat file TinyCoin.sol.
+Kompilasi dengan Solidity Compiler.
+Deploy ke jaringan JavaScript VM atau testnet Ethereum.
+Catat alamat kontrak hasil deployment.
+
+# Langkah 3 — Uji Fungsionalitas
+Cek saldo awal dengan fungsi balanceOf(address).
+Lakukan transfer token dengan fungsi transfer(address, amount).
+Uji apakah total supply tetap konsisten setelah transaksi.
+
+# Langkah 4 — Dokumentasi
+Simpan tangkapan layar proses deployment & transaksi.
+Dokumentasikan alur kontrak (fungsi utama: constructor, mint, transfer).
+Tambahkan analisis singkat tentang potensi keamanan smart contract (contoh: reentrancy, overflow – walaupun mitigasi sudah ada di Solidity >=0.8).
 
 ---
 
 ## 5. Source Code
-(Salin kode program utama yang dibuat atau dimodifikasi.  
-Gunakan blok kode:
+
 
 ```python
-# contoh potongan kode
-def encrypt(text, key):
-    return ...
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract TinyCoin is ERC20 {
+    constructor(uint256 initialSupply) ERC20("TinyCoin", "TNC") {
+        _mint(msg.sender, initialSupply);
+    }
+}
 ```
 )
 
@@ -64,14 +95,13 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 7. Jawaban Pertanyaan
-(Jawab pertanyaan diskusi yang diberikan pada modul.  
-- Pertanyaan 1: …  
-- Pertanyaan 2: …  
-)
+1. Fungsi utama ERC20 adalah menjadi standar umum untuk token di blockchain etherium, supaya token dapat berinteraksi dengan wallet, apliasi, dan platform lain secara konsisten dan mudah
+2. Mekanisme transfer token di ERC20 melibatkan fungsu transfer yang digunakan untuk mengurangi saldo pengirim dan menambah saldo penerima, dan memicu event transfer untuk pencatatan dan tranparansi transaksi
+3. Resiko utama smart contract adalah bug kode, celah keamanan dan overlow/underlow. Mitigasinya berupa audit kode, penggunaan pustaka yang sudah teruji, pengujian menyeluruh, dan pembaruan kontrak bila ditemukan masalah
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+TInyCoin ERC20 adalah token digital berbasis standar ERC20 ETherium yang memungkinkan transaksi aman dan transparan melalui smart contract, memanfaatkan interoperabilitas dan otomatisasi dalam ekosistem blockchain
 
 ---
 

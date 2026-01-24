@@ -37,3 +37,4 @@ print("Shares:", shares)
 
 recovered = recover_secret(shares[:3])
 print("Recovered secret:", recovered)
+

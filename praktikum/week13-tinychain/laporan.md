@@ -86,7 +86,11 @@ my_chain.add_block(Block(2, "", "Transaksi B → C: 5 Coin"))
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+fungsi hash dan mekanisme Proof of Work (PoW) memiliki peran yang sangat penting dalam menjaga keamanan dan integritas sistem blockchain. Fungsi hash digunakan untuk mengamankan data dalam setiap blok serta membentuk keterkaitan antarblok sehingga data yang telah tercatat tidak dapat diubah tanpa memengaruhi seluruh rantai blockchain.
+
+Simulasi TinyChain menunjukkan bagaimana Proof of Work bekerja melalui proses pencarian nilai nonce untuk menghasilkan hash dengan tingkat kesulitan tertentu. Proses ini membuktikan bahwa penambahan blok ke dalam blockchain memerlukan usaha komputasi yang signifikan, sehingga mempersulit terjadinya manipulasi data maupun serangan seperti double spending.
+
+Namun demikian, mekanisme Proof of Work memiliki kelemahan utama berupa konsumsi energi yang tinggi dan efisiensi yang rendah. Hal ini mendorong pengembangan mekanisme konsensus alternatif seperti Proof of Stake (PoS) yang lebih ramah lingkungan. Meskipun begitu, PoW tetap menjadi fondasi penting dalam pengembangan awal teknologi blockchain dan cryptocurrency berbasis kriptografi.
 
 ---
 
@@ -103,7 +107,7 @@ Contoh:
 Contoh:
 ```
 commit abc12345
-Author: Nama Mahasiswa <email>
+Author: Maulia Endika Putri <mauliaendikaputrii@gmail.com>
 Date:   2025-09-20
 
     week2-cryptosystem: implementasi Caesar Cipher dan laporan )
